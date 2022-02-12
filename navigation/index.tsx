@@ -13,6 +13,7 @@ import { ColorSchemeName, Pressable, View } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
+import ChatScreen from '../screens/ChatScreen';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import TabOneScreen from '../screens/TabOneScreen';
@@ -94,7 +95,7 @@ function MainTabNavigator() {
       
       <MainTab.Screen
         name="Chats"
-        component={TabOneScreen}
+        component={ChatScreen}
         options={{
         title: 'Chats',
         // tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
