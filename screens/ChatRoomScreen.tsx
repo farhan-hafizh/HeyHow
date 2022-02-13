@@ -5,6 +5,7 @@ import ChatMessage from '../components/ChatMessage';
 import { Text} from '../components/Themed'
 import Chats from '../data/Chats';
 import BG from '../assets/images/BG.jpeg';
+import InputBoxChat from '../components/InputBoxChat';
 
 export default function ChatRoomScreen() {
 
@@ -18,6 +19,7 @@ export default function ChatRoomScreen() {
                 renderItem={({item}) => <ChatMessage message={item}/>}
                 inverted
             />
+            <InputBoxChat/>
         </ImageBackground>
     </View>
   )

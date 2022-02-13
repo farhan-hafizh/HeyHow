@@ -63,7 +63,7 @@ function RootNavigator() {
           )
         }}/>
       <Stack.Screen name="ChatRoom" component={ChatRoomScreen} options={({route}) => ({
-        title: route.params.name,
+        title: route.params.name, //get name passed from route
         headerRight: () => (
           <View style={{flexDirection: 'row', justifyContent: 'space-between',width:100}}>
               <Ionicons name="call" size={24} color= {Colors.light.background} />

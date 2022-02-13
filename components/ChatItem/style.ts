@@ -25,7 +25,9 @@ const styles = StyleSheet.create({
     ,
     chatUser:{
         fontWeight: "bold",
-        fontSize: 16
+        fontSize: 16,
+        justifyContent:"center",
+        width:"100%"
     },
     avatar:{
         borderRadius:50,
