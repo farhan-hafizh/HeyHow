@@ -13,8 +13,9 @@ export default function ChatScreen() {
         data={ChatRooms}
         renderItem={( {item} ) => <ChatList chatRoom={item}/>}
         keyExtractor={(item) => item.id}
+        nestedScrollEnabled
       /> 
-      {/* send all message */}
+      {/* display all message */}
     </View>
   )
 }

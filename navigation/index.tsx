@@ -3,16 +3,18 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { AntDesign, Entypo, FontAwesome } from '@expo/vector-icons';
+import { AntDesign, Entypo, FontAwesome, Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { ColorSchemeName, Pressable, View } from 'react-native';
+import { Avatar } from 'react-native-elements';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
+import ChatRoomScreen from '../screens/ChatRoomScreen';
 import ChatScreen from '../screens/ChatScreen';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
@@ -60,6 +62,22 @@ function RootNavigator() {
             </View>
           )
         }}/>
+      <Stack.Screen name="ChatRoom" component={ChatRoomScreen} options={({route}) => ({
+        title: route.params.name,
+        headerRight: () => (
+          <View style={{flexDirection: 'row', justifyContent: 'space-between',width:100}}>
+              <Ionicons name="call" size={24} color= {Colors.light.background} />
+              <FontAwesome name="video-camera" size={24} color={Colors.light.background} />
+              <Avatar
+                size={24}
+                rounded
+                source={{ uri: route.params.imageUri }}
+                title="Profile"
+                // containerStyle= {styles.avatar}
+              ></Avatar>
+          </View>
+        )
+      })} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
