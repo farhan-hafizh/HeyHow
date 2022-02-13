@@ -1,4 +1,5 @@
 import React from 'react'
+import { FlatList } from 'react-native'
 import { StyleSheet } from 'react-native'
 import ChatList from '../components/ChatItem'
 import EditScreenInfo from '../components/EditScreenInfo'
@@ -8,7 +9,11 @@ import ChatRooms from '../data/ChatRoom'
 export default function ChatScreen() {
   return (
     <View style={style.container}>
-      <ChatList chatRoom={ChatRooms[0]}/> 
+      <FlatList
+        data={ChatRooms}
+        renderItem={( {item} ) => <ChatList chatRoom={item}/>}
+        keyExtractor={(item) => item.id}
+      /> 
       {/* send all message */}
     </View>
   )
