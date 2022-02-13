@@ -16,6 +16,7 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ChatRoomScreen from '../screens/ChatRoomScreen';
 import ChatScreen from '../screens/ChatScreen';
+import ContactScreen from '../screens/ContactScreen';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import TabOneScreen from '../screens/TabOneScreen';
@@ -51,6 +52,7 @@ function RootNavigator() {
         fontWeight: 'bold'
       },
     }}>
+      {/* home chat screen */}
       <Stack.Screen name="Root" 
         component={MainTabNavigator} 
         options={{ 
@@ -62,6 +64,7 @@ function RootNavigator() {
             </View>
           )
         }}/>
+        {/* chat room screen */}
       <Stack.Screen name="ChatRoom" component={ChatRoomScreen} options={({route}) => ({
         title: route.params.name, //get name passed from route
         headerRight: () => (
@@ -78,6 +81,8 @@ function RootNavigator() {
           </View>
         )
       })} />
+      <Stack.Screen name="Contacts" component={ContactScreen} />
+
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
