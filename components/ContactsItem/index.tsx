@@ -37,7 +37,7 @@ export default function ContactsListItem(props : ContactListItem) {
           <View style={styles.chatMessage}>
             <Text style={styles.chatUser}>{user.name}</Text>
             <View style={{width:"100%"}}>
-              <Text style={styles.lastMessage} numberOfLines={1} ellipsizeMode="tail">{user.status}</Text>
+              <Text style={styles.status} numberOfLines={1} ellipsizeMode="tail">{user.status}</Text>
             </View>
           </View>
           </View>
