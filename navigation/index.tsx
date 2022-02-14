@@ -11,12 +11,16 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { ColorSchemeName, Pressable, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import FirebaseApp from "../constants/FirebaseConfig";
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ChatRoomScreen from '../screens/ChatRoomScreen';
 import ChatScreen from '../screens/ChatScreen';
 import ContactScreen from '../screens/ContactScreen';
+import LoginScreen from '../screens/LoginScreen';
+import RegisterScreen from '../screens/RegisterScreen';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import TabOneScreen from '../screens/TabOneScreen';
@@ -25,12 +29,50 @@ import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../typ
 import LinkingConfiguration from './LinkingConfiguration';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
+  const [user , setUser] = React.useState<any>(null);
+// get Firebase app
+  const app=FirebaseApp;
+  const auth = getAuth(app);
+onAuthStateChanged(auth, (_user) => {
+  if (_user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    setUser(_user);
+    // ...
+  } else {
+    // User is signed out
+    // ...
+  }
+});
+  React.useEffect(() =>{
+    // boot();//execute 
+  },[]); //run once
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
       theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <RootNavigator />
+      {user !== null ? <RootNavigator /> : <AuthStackNavigator/>}
     </NavigationContainer>
+  );
+}
+const AuthStack = createNativeStackNavigator<RootStackParamList>();
+
+function AuthStackNavigator(){
+  return(
+    <AuthStack.Navigator screenOptions={{
+      headerStyle: {
+        backgroundColor: Colors.light.tint
+      },
+      headerTintColor: Colors.light.background,
+      headerTitleAlign: 'left',
+      headerTitleStyle:{
+        fontWeight: 'bold'
+      },
+    }}>
+      <AuthStack.Screen name='Login' component={LoginScreen} />
+
+      <AuthStack.Screen name='Register' component={RegisterScreen} />
+    </AuthStack.Navigator>
   );
 }
 
