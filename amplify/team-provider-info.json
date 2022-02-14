@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-heyhow-dev-103934-authRole",
+      "UnauthRoleArn": "arn:aws:iam::622160944709:role/amplify-heyhow-dev-103934-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::622160944709:role/amplify-heyhow-dev-103934-authRole",
+      "Region": "ap-southeast-1",
+      "DeploymentBucketName": "amplify-heyhow-dev-103934-deployment",
+      "UnauthRoleName": "amplify-heyhow-dev-103934-unauthRole",
+      "StackName": "amplify-heyhow-dev-103934",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:622160944709:stack/amplify-heyhow-dev-103934/be437890-8d47-11ec-aa43-029a9970eeea",
+      "AmplifyAppId": "d21gao5vq8qdx0"
+    }
+  }
+}
