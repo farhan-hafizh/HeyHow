@@ -10,6 +10,11 @@
       "StackName": "amplify-heyhow-dev-103934",
       "StackId": "arn:aws:cloudformation:ap-southeast-1:622160944709:stack/amplify-heyhow-dev-103934/be437890-8d47-11ec-aa43-029a9970eeea",
       "AmplifyAppId": "d21gao5vq8qdx0"
+    },
+    "categories": {
+      "auth": {
+        "heyhow659830cc": {}
+      }
     }
   }
 }
