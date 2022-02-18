@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { Alert, StyleSheet } from 'react-native'
 import { Text, View } from '../components/Themed'
 import React, { useState, useRef } from 'react';
 import { TextInput } from 'react-native';
@@ -10,43 +10,61 @@ import * as Facebook from 'expo-facebook';
 
 import { getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
 import useGoogleAuth from '../hooks/useGoogleAuth';
-import app from '../constants/FirebaseConfig';
+import auth from '../constants/FirebaseConfig';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 export default function LoginScreen() {
 
   const[PasswordFocused, setPasswordFocused] = useState(false)
     const email = useRef(1)
     const password = useRef(2)
+  // const [user,setUser]= useState<any>();
 
-    const googleLogin = () =>{
-      const user =useGoogleAuth(new GoogleAuthProvider());
-      // const provider = new GoogleAuthProvider();
 
-      
+    const googleLogin = async() =>{
+      // try {
+      //   await GoogleSignin.hasPlayServices();
+      //   console.log("asdasd");
+      //   GoogleSignin.configure();
+      //   const userInfo = await GoogleSignin.signIn();
+      //   console.log(userInfo);
+      // } catch (error) {
+        // if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        //   // user cancelled the login flow
+        // } else if (error.code === statusCodes.IN_PROGRESS) {
+        //   // operation (e.g. sign in) is in progress already
+        // } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        //   // play services not available or outdated
+        // } else {
+        //   // some other error happened
+        // }
+      // }
     } 
     const facebookLogin = async() =>{
-      try {
-        const auth = getAuth(app);
-
-        await Facebook.initializeAsync('490036159311365'); // enter your Facebook App Id 
-        const { type, token } = await Facebook.logInWithReadPermissionsAsync({
-          permissions: ['public_profile', 'email'],
+    try {
+      await Facebook.initializeAsync({
+        appId: '490036159311365',
+      });  
+      const { type, token, expirationDate, permissions, declinedPermissions } =
+        await Facebook.logInWithReadPermissionsAsync({
+          permissions: ['public_profile'],
         });
-        if (type === 'success') {
-          // SENDING THE TOKEN TO FIREBASE TO HANDLE AUTH
-          const credential = FacebookAuthProvider.credential(token);
-          signInWithPopup(auth,credential)
-            .then(user => { // All the details about user are in here returned from firebase
-              console.log('Logged in successfully', user)
-            })
-            .catch((error) => {
-              console.log('Error occurred ', error)
-            });
-        } else {
-          // type === 'cancel'
-        }
+      if (type === 'success') {
+        // Get the user's name using Facebook's Graph API
+
+        const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
+        
+        const userId=(await response.json()).id;
+
+        const userData = await fetch(`https://graph.facebook.com/${userId}?fields=id,name,email,picture&access_token=${token}`)
+        
+        console.log(await userData.json());
+        // Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
+      } else {
+        // type === 'cancel'
+      }
     } catch ({ message }) {
-        alert(`Facebook Login Error: ${message}`);
+      alert(`Facebook Login Error: ${message}`);
     }
     } 
 

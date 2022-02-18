@@ -1,6 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import firebase from "./constants/Firebase"
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
@@ -22,4 +21,4 @@ function App() {
   }
 }
 
-export default App; //aws auth
+export default App; 

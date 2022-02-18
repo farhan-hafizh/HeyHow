@@ -12,7 +12,7 @@ import * as React from 'react';
 import { ColorSchemeName, Pressable, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import FirebaseApp from "../constants/FirebaseConfig";
+import auth from "../constants/FirebaseConfig";
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -30,9 +30,7 @@ import LinkingConfiguration from './LinkingConfiguration';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   const [user , setUser] = React.useState<any>(null);
-// get Firebase app
-  const app=FirebaseApp;
-  const auth = getAuth(app);
+
 onAuthStateChanged(auth, (_user) => {
   if (_user) {
     // User is signed in, see docs for a list of available properties
@@ -41,7 +39,7 @@ onAuthStateChanged(auth, (_user) => {
     // ...
   } else {
     // User is signed out
-    // ...
+    setUser(null);
   }
 });
   React.useEffect(() =>{
@@ -52,6 +50,7 @@ onAuthStateChanged(auth, (_user) => {
       linking={LinkingConfiguration}
       theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       {user !== null ? <RootNavigator /> : <AuthStackNavigator/>}
+      {/* <RootNavigator/> */}
     </NavigationContainer>
   );
 }

@@ -25,8 +25,7 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "package": "com.farhannovyan.HeyHow"
+      }
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
